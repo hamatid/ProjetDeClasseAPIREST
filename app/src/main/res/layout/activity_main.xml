@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:padding="10dp">
+    android:layout_margin="7dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,12 +15,46 @@
         android:text="Gestion des programmations"
         android:textSize="40dp"
         android:textStyle="bold"/>
-    <HorizontalScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+        <EditText
+            android:id="@+id/enseignant_edt"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom enseignant"/>
+        <EditText
+            android:id="@+id/filiere_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Filière"/>
+
+        <EditText
+            android:id="@+id/classe_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Classe"/>
+        <EditText
+            android:id="@+id/matiere_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Matière"/>
+
+        <EditText
+            android:id="@+id/creneau_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Creneau"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
@@ -28,37 +62,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AJOUTER"
-                android:padding="10dp"
-                android:layout_margin="7dp"/>
+                android:padding="5dp" />
             <Button
                 android:id="@+id/modifier_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MODIFIER"
-                android:padding="10dp"
-                android:layout_margin="7dp"/>
+                android:padding="5dp" />
             <Button
                 android:id="@+id/supprimer_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SUPPRIMER"
-                android:padding="10dp"
-                android:layout_margin="7dp"/>
+                android:padding="5dp" />
             <Button
                 android:id="@+id/afficher_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AFFICHER"
-                android:padding="10dp"
-                android:layout_margin="7dp"/>
-
-
-
+                android:padding="5dp" />
         </LinearLayout>
-
-
-
-
-    </HorizontalScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
