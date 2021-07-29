@@ -76,10 +76,10 @@
                 android:text="SUPPRIMER"
                 android:padding="5dp" />
             <Button
-                android:id="@+id/afficher_btn"
+                android:id="@+id/rechercher_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AFFICHER"
+                android:text="RECHERCHER"
                 android:padding="5dp" />
         </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
