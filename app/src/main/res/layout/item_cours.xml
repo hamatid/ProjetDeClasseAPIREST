@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/matiere_item_edt"
+            android:id="@+id/matiere_item_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="35dp"
@@ -17,28 +17,28 @@
             android:text="Matière"
             android:padding="10dp"/>
         <TextView
-            android:id="@+id/nomprofesseur_item_edt"
+            android:id="@+id/nomprofesseur_item_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:text="Nom du professeur"
             android:padding="7dp"/>
         <TextView
-            android:id="@+id/filiere_item_edt"
+            android:id="@+id/filiere_item_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:text="Filière"
             android:padding="7dp"/>
         <TextView
-            android:id="@+id/creneau_item_edt"
+            android:id="@+id/creneau_item_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:text="Creneau"
             android:padding="7dp"/>
         <TextView
-            android:id="@+id/classe_item_edt"
+            android:id="@+id/classe_item_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"

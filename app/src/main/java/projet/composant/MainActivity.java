@@ -1,6 +1,7 @@
 package projet.composant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +9,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 EditText nomEnseignant_edt, filiere_edt,classe_edt,matiere_edt,creneau_edt;
 Button ajouter, supprimer, modifier,afficher;
 String nomEnseignant, nomFiliere, nomClasse, nomMatiere,nomCreneau;
+
+RecyclerView recyclerView;
+CoursAdapter coursAdapter;
+List<CoursModel> coursModelList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,12 @@ String nomEnseignant, nomFiliere, nomClasse, nomMatiere,nomCreneau;
         supprimer = findViewById(R.id.supprimer_btn);
         modifier = findViewById(R.id.modifier_btn);
         afficher = findViewById(R.id.afficher_btn);
+
+        CoursModel coursModel = new CoursModel("Bertrand","Philosiphie","CP1","Drague","Minuit");
+        coursModelList.add(coursModel);
+        recyclerView = findViewById(R.id.recyclerview);
+        coursAdapter = new CoursAdapter(coursModelList);
+        recyclerView.setAdapter(coursAdapter);
 
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +74,7 @@ String nomEnseignant, nomFiliere, nomClasse, nomMatiere,nomCreneau;
         afficher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
             }
         });
