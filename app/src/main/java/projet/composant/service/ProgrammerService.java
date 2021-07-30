@@ -1,8 +1,8 @@
-package projet.composant.network;
+package projet.composant.service;
 
 import java.util.List;
 
-import projet.composant.model.Programmer;
+import projet.composant.model.Cours;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -14,16 +14,16 @@ import retrofit2.http.Path;
 public interface ProgrammerService {
 
     @GET("get_all_cours")
-    Call<List<Programmer>> apiRead();
+    Call<List<Cours>> apiRead();
 
     @POST("create_cours")
-    Call<Programmer> apiCreate(@Body Programmer programmer);
+    Call<Cours> apiCreate(@Body Cours programmer);
 
     @PUT("modifier_cours/{id_cours}")
-    Call<Programmer> apiUpdate(@Path("id_cours") int id,@Body Programmer programmer);
+    Call<Cours> apiUpdate(@Path("id_cours") int id, @Body Cours programmer);
 
     @DELETE("supprimer_cours/{id_cours}")
-    Call<Programmer> apiDelete(@Path("id_cours") int id);
+    Call<Cours> apiDelete(@Path("id_cours") int id);
 
 
 }

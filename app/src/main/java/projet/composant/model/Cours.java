@@ -3,7 +3,7 @@ package projet.composant.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Programmer {
+public class Cours {
 
     @SerializedName("id")
     private int id;
@@ -23,10 +23,10 @@ public class Programmer {
     @SerializedName("vh")
     private String vh;
 
-    public Programmer() {
+    public Cours() {
     }
 
-    public Programmer(int id, String nom_enseignant, String filiere, String matiere, String classe, String vh) {
+    public Cours(int id, String nom_enseignant, String filiere, String matiere, String classe, String vh) {
         this.id = id;
         this.nom_enseignant = nom_enseignant;
         this.filiere = filiere;
@@ -38,7 +38,7 @@ public class Programmer {
 
     @Override
     public String toString() {
-        return "user{" +
+        return "cours{" +
                 "id=" + id +
                 ", nom_enseignant='" + nom_enseignant + '\'' +
                 ", matiere='" + matiere + '\'' +
@@ -47,10 +47,7 @@ public class Programmer {
                 ", vh='" + vh + '\'' +
                 '}';
     }
-
-
-
-
+    
     public int getId() {
         return id;
     }
