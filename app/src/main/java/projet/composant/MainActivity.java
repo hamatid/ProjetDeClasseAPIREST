@@ -1,5 +1,6 @@
 package projet.composant;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import projet.composant.adapter.CoursAdapter;
 import projet.composant.model.Cours;
 import projet.composant.network.ApiUtils;
 import projet.composant.service.ProgrammerService;
+import projet.composant.utils.Global;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
     ProgrammerService programmerService;
     Cours programmer;
 
-
+    int id;
+    String status_request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +59,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("cour_item"));
+        getAll();
 
     }
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            makeText(context,intent.getStringExtra("nom_ens"),Toast.LENGTH_LONG).show();
+
+            status_request = intent.getStringExtra("status");
+
+            if (status_request.equals("edit")){
+                nomEnseignant_edt.setText(intent.getStringExtra("nom_ens"));
+                filiere_edt.setText(intent.getStringExtra("filiere"));
+                classe_edt.setText(intent.getStringExtra("classe"));
+                creneau_edt.setText(intent.getStringExtra("creneau"));
+                matiere_edt.setText(intent.getStringExtra("matiere"));
+                id = Integer.parseInt(intent.getStringExtra("cour_id")) ;
+                init();
+                programmer.setId(Integer.parseInt(intent.getStringExtra("cour_id")));
+            }else {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                dialogBuilder.setTitle("Attention");
+                dialogBuilder.setMessage("Voulez vous reelement effectuer la supression ?");
+                dialogBuilder.setPositiveButton("Oui", (dialog, which) -> {
+                    id = Integer.parseInt(intent.getStringExtra("cour_id")) ;
+                    deleteProgramme(id);
+                    dialog.dismiss();
+                });
+
+                dialogBuilder.setNeutralButton("Non", (dialog, which) -> dialog.dismiss());
+                dialogBuilder.create().show();
+            }
         }
     };
 
@@ -152,27 +180,24 @@ public class MainActivity extends AppCompatActivity {
         programmer.setVh(creneau_edt.getText().toString());
     }
 
-    @OnClick({R.id.ajouter_btn,R.id.modifier_btn,R.id.supprimer_btn,R.id.rechercher_btn})
+    @OnClick({R.id.save,R.id.search})
     public void managedAction(View view){
-        if(view.getId()==R.id.ajouter_btn){
-            init();
-            createProgramme(programmer);
-            getAll();
-        }
+        if(view.getId()==R.id.save){
 
-        if(view.getId()==R.id.modifier_btn){
-            init();
-            updateProgramme(programmer.getId(),programmer);
-        }
+            Toast.makeText(this,status_request,Toast.LENGTH_LONG).show();
 
-        if(view.getId()==R.id.supprimer_btn){
-            deleteProgramme(programmer.getId());
-        }
+            if (status_request=="edit"){
+                status_request=null;
+                updateProgramme(id, programmer);
+                getAll();
 
-        if(view.getId()==R.id.rechercher_btn){
-            getAll();
-        }
+            }else {
+                init();
+                createProgramme(programmer);
+                getAll();
+            }
 
+        }
 
     }
 }

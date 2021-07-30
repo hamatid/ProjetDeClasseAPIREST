@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,6 +23,7 @@ import butterknife.ButterKnife;
 import projet.composant.MainActivity;
 import projet.composant.R;
 import projet.composant.model.Cours;
+import projet.composant.utils.Global;
 
 public class CoursAdapter extends ArrayAdapter<Cours> {
 
@@ -64,7 +67,7 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         holder.classe.setText(String.format("Classe: %s", cours.get(pos).getClasse()));
         holder.creneau.setText(String.format("Creneau: %s", cours.get(pos).getVh()));
 
-        view.setOnClickListener(new View.OnClickListener() {
+        holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("cour_item");
@@ -74,9 +77,30 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
                 intent.putExtra("classe", cours.get(pos).getClasse());
                 intent.putExtra("matiere", cours.get(pos).getMatiere());
                 intent.putExtra("creneau", cours.get(pos).getVh());
+                intent.putExtra("status", "edit");
+                Global.status = "edit";
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
         });
+
+        holder.del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("cour_item");
+                intent.putExtra("cour_id", String.valueOf(cours.get(pos).getId()));
+                intent.putExtra("status", "del");
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                Global.status = "del";
+            }
+        });
+
+        /*
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
 
         return view;
     }
@@ -92,6 +116,12 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         TextView matiere;
         @BindView(R.id.creneau)
         TextView creneau;
+
+        @BindView(R.id.del)
+        MaterialButton del;
+
+        @BindView(R.id.edit)
+        MaterialButton edit;
         ViewHolder (View view){
             ButterKnife.bind(this,view);
         }

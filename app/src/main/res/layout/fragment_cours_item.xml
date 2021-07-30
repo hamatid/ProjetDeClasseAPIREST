@@ -1,45 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white"
-    android:elevation="@dimen/_20sdp"
-    android:layout_margin="@dimen/_5sdp">
+    android:elevation="@dimen/_20sdp">
 
-    <TextView
-        android:id="@+id/nom_ens"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+            <TextView
+                android:id="@+id/nom_ens"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nom Ens"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/filiere"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/filiere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filiere"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/classe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/classe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Classe"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/matiere"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/matiere"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Matiere"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/creneau"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/creneau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Creneau"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/del"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:background="@color/white"
+                android:elevation="@dimen/_10sdp"
+                android:drawableLeft="@drawable/del"
+                android:textColor="@color/black"
+                app:strokeColor="@color/red"
+                app:strokeWidth="@dimen/_2sdp"
+                app:cornerRadius="@dimen/_15sdp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:background="@color/white"
+                android:elevation="@dimen/_10sdp"
+                android:drawableLeft="@drawable/edit"
+                android:textColor="@color/black"
+                app:strokeColor="@color/blue"
+                app:strokeWidth="@dimen/_2sdp"
+                app:cornerRadius="@dimen/_15sdp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 </LinearLayout>

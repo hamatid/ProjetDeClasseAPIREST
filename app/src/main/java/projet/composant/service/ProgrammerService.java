@@ -19,7 +19,7 @@ public interface ProgrammerService {
     @POST("create_cours")
     Call<Cours> apiCreate(@Body Cours programmer);
 
-    @PUT("modifier_cours/{id_cours}")
+    @PUT("modifier_cours")
     Call<Cours> apiUpdate(@Path("id_cours") int id, @Body Cours programmer);
 
     @DELETE("supprimer_cours/{id_cours}")

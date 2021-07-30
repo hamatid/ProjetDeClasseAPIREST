@@ -6,14 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/blue_gray"
     tools:context=".MainActivity"
-    android:layout_margin="7dp">
+    android:paddingLeft="@dimen/_10sdp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gestion des programmations"
-        android:textSize="40dp"
+        android:gravity="center"
+        android:textSize="@dimen/_25sdp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
         android:textStyle="bold"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,64 +28,89 @@
             android:id="@+id/enseignant_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom enseignant"/>
+            android:hint="Nom enseignant"
+            android:textColorHint="@color/black"/>
         <EditText
             android:id="@+id/filiere_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
             android:hint="Filière"/>
 
         <EditText
             android:id="@+id/classe_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/black"
             android:hint="Classe"/>
         <EditText
             android:id="@+id/matiere_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Matière"/>
+            android:hint="Matière"
+            android:textColorHint="@color/black"/>
 
         <EditText
             android:id="@+id/creneau_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Creneau"/>
+            android:hint="Creneau"
+            android:textColorHint="@color/black"/>
 
 
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/ajouter_btn"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AJOUTER"
-                android:padding="5dp" />
-            <Button
-                android:id="@+id/modifier_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MODIFIER"
-                android:padding="5dp" />
-            <Button
-                android:id="@+id/supprimer_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SUPPRIMER"
-                android:padding="5dp" />
-            <Button
-                android:id="@+id/rechercher_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="RECHERCHER"
-                android:padding="5dp" />
+                android:layout_height="@dimen/_30sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:background="@color/white"
+                android:elevation="@dimen/_10sdp"
+                android:drawableLeft="@drawable/save"
+                android:textColor="@color/black"
+                app:strokeColor="@color/green"
+                app:strokeWidth="@dimen/_2sdp"
+                app:cornerRadius="@dimen/_15sdp"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:paddingLeft="@dimen/_30sdp"
+                android:background="@color/white"
+                android:elevation="@dimen/_10sdp"
+                android:drawableLeft="@drawable/search"
+                android:textColor="@color/black"
+                app:strokeColor="@color/green"
+                app:strokeWidth="@dimen/_2sdp"
+                app:cornerRadius="@dimen/_15sdp"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
