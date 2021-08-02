@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class Cours {
 
     @SerializedName("id")
-    private int id;
+    private String id;
 
     @SerializedName("nom_enseignant")
     private String nom_enseignant;
@@ -26,7 +26,7 @@ public class Cours {
     public Cours() {
     }
 
-    public Cours(int id, String nom_enseignant, String filiere, String matiere, String classe, String vh) {
+    public Cours(String id, String nom_enseignant, String filiere, String matiere, String classe, String vh) {
         this.id = id;
         this.nom_enseignant = nom_enseignant;
         this.filiere = filiere;
@@ -47,12 +47,12 @@ public class Cours {
                 ", vh='" + vh + '\'' +
                 '}';
     }
-    
-    public int getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

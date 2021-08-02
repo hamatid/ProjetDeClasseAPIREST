@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
     ProgrammerService programmerService;
     Cours programmer;
 
-    int id;
     String status_request;
 
     @Override
@@ -75,16 +74,16 @@ public class MainActivity extends AppCompatActivity {
                 classe_edt.setText(intent.getStringExtra("classe"));
                 creneau_edt.setText(intent.getStringExtra("creneau"));
                 matiere_edt.setText(intent.getStringExtra("matiere"));
-                id = Integer.parseInt(intent.getStringExtra("cour_id")) ;
                 init();
-                programmer.setId(Integer.parseInt(intent.getStringExtra("cour_id")));
+                programmer.setId(intent.getStringExtra("cour_id"));
             }else {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 dialogBuilder.setTitle("Attention");
                 dialogBuilder.setMessage("Voulez vous reelement effectuer la supression ?");
                 dialogBuilder.setPositiveButton("Oui", (dialog, which) -> {
-                    id = Integer.parseInt(intent.getStringExtra("cour_id")) ;
-                    deleteProgramme(id);
+                    init();
+                    programmer.setId(intent.getStringExtra("cour_id"));
+                    deleteProgramme();
                     dialog.dismiss();
                 });
 
@@ -133,14 +132,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateProgramme(int id, Cours p){
+    private void updateProgramme(Cours p){
         programmerService = ApiUtils.getProgrammerService();
-        Call<Cours> call = programmerService.apiUpdate(id, p);
+        Call<Cours> call = programmerService.apiUpdate(p);
         call.enqueue(new Callback<Cours>() {
             @Override
             public void onResponse(Call<Cours> call, Response<Cours> response) {
-                if(response.isSuccessful()){
+                int status = response.code();
+                if(status == 200){
                     makeText(MainActivity.this, "User updated successfully!", Toast.LENGTH_SHORT).show();
+                    getAll();
                 }
             }
 
@@ -152,16 +153,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void deleteProgramme(int id){
+    private void deleteProgramme(){
         programmerService = ApiUtils.getProgrammerService();
-        Call<Cours> call = programmerService.apiDelete(id);
+        Call<Cours> call = programmerService.apiDelete(programmer.getId());
         call.enqueue(new Callback<Cours>() {
             @Override
             public void onResponse(Call<Cours> call, Response<Cours> response) {
+                int status = response.code();
                 if(response.isSuccessful()){
-                    makeText(MainActivity.this, "User deleted successfully!", Toast.LENGTH_SHORT).show();
+                    makeText(MainActivity.this, "Cour deleted successfully!", Toast.LENGTH_SHORT).show();
+                    getAll();
                 }
+
             }
+
 
             @Override
             public void onFailure(Call<Cours> call, Throwable t) {
@@ -169,6 +174,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        makeText(MainActivity.this, "Cour deleted successfully!", Toast.LENGTH_SHORT).show();
+        getAll();
     }
 
     private void init(){
@@ -184,12 +192,10 @@ public class MainActivity extends AppCompatActivity {
     public void managedAction(View view){
         if(view.getId()==R.id.save){
 
-            Toast.makeText(this,status_request,Toast.LENGTH_LONG).show();
 
             if (status_request=="edit"){
+                updateProgramme(programmer);
                 status_request=null;
-                updateProgramme(id, programmer);
-                getAll();
 
             }else {
                 init();

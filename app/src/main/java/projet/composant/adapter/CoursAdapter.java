@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import projet.composant.MainActivity;
 import projet.composant.R;
 import projet.composant.model.Cours;
 import projet.composant.utils.Global;
+
+import static android.widget.Toast.makeText;
 
 public class CoursAdapter extends ArrayAdapter<Cours> {
 
@@ -60,7 +63,6 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         }else{
             view.setBackgroundColor(Color.parseColor("#009289"));
         }
-        int id = cours.get(pos).getId();
         holder.nom_ens.setText(String.format("Nom Enseignant: %s", cours.get(pos).getNom_enseignant()));
         holder.filiere.setText(String.format("Filiere: %s", cours.get(pos).getFiliere()));
         holder.matiere.setText(String.format("Matiere: %s", cours.get(pos).getMatiere()));
@@ -71,14 +73,13 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("cour_item");
-                intent.putExtra("cour_id", String.valueOf(cours.get(pos).getId()));
+                intent.putExtra("cour_id", cours.get(pos).getId());
                 intent.putExtra("nom_ens", cours.get(pos).getNom_enseignant());
                 intent.putExtra("filiere", cours.get(pos).getFiliere());
                 intent.putExtra("classe", cours.get(pos).getClasse());
                 intent.putExtra("matiere", cours.get(pos).getMatiere());
                 intent.putExtra("creneau", cours.get(pos).getVh());
                 intent.putExtra("status", "edit");
-                Global.status = "edit";
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
         });
@@ -87,10 +88,9 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("cour_item");
-                intent.putExtra("cour_id", String.valueOf(cours.get(pos).getId()));
+                intent.putExtra("cour_id", cours.get(pos).getId());
                 intent.putExtra("status", "del");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-                Global.status = "del";
             }
         });
 
