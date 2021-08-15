@@ -54,6 +54,7 @@
             android:id="@+id/creneau_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Creneau"
             android:textColorHint="@color/black"/>
 
@@ -79,20 +80,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="save"
-                />
+                android:textColor="@color/white"
+                android:background="@color/green"
+                android:layout_gravity="center" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_gravity="center">
-        </LinearLayout>
-
-
-
-
     </LinearLayout>
     <ListView
         android:id="@+id/listView"

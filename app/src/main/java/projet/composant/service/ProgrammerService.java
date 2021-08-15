@@ -27,9 +27,7 @@ public interface ProgrammerService {
 
     @POST("api/create/")
     Call<Cours> apiCreate(@Body Cours programmer);
-/*
-    @POST("modifier_cours")
-    Call<Cours> apiUpdate(@Body Cours programmer);*/
+
 
     @PUT("api/update/{id}/")
     Call<Cours> apiUpdate(@Path("id") int id,@Body Cours programmer);

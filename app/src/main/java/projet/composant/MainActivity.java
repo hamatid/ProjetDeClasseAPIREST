@@ -98,8 +98,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Cours> call, Response<Cours> response) {
                 if(response.isSuccessful()){
-                    makeText(MainActivity.this, "Programme created successfully!", Toast.LENGTH_SHORT).show();
-                    refresh();
+                    makeText(MainActivity.this, "Ajouter succes!", Toast.LENGTH_SHORT).show();
+                    getAll();
+                    nomEnseignant_edt.setText(null);
+                    matiere_edt.setText(null);
+                    filiere_edt.setText(null);
+                    classe_edt.setText(null);
+                    creneau_edt.setText(null);
                 }
             }
 
@@ -144,8 +149,13 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Cours> call, Response<Cours> response) {
                 int status = response.code();
                 if(status == 200){
-                    makeText(MainActivity.this, "User updated successfully!", Toast.LENGTH_SHORT).show();
+                    makeText(MainActivity.this, "Mise a jour avec succes!", Toast.LENGTH_SHORT).show();
                     getAll();
+                    nomEnseignant_edt.setText(null);
+                    matiere_edt.setText(null);
+                    filiere_edt.setText(null);
+                    classe_edt.setText(null);
+                    creneau_edt.setText(null);
                 }
             }
 
@@ -154,10 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
-
-        //getAll();
-        //makeText(MainActivity.this, "User updated successfully!", Toast.LENGTH_SHORT).show();
-        refresh();
 
     }
 
@@ -169,22 +175,17 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Cours> call, Response<Cours> response) {
                 int status = response.code();
                 if(response.isSuccessful()){
-                    makeText(MainActivity.this, "Cour deleted successfully!", Toast.LENGTH_SHORT).show();
+                    makeText(MainActivity.this, "Supprimer avec succes!", Toast.LENGTH_SHORT).show();
                     getAll();
                 }
 
             }
-
-
             @Override
             public void onFailure(Call<Cours> call, Throwable t) {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
 
-
-        makeText(MainActivity.this, "Cour deleted successfully!", Toast.LENGTH_SHORT).show();
-        getAll();
     }
 
     private void init(){
@@ -203,18 +204,74 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (status_request=="edit"){
-                updateProgramme();
-                status_request=null;
-                getAll();
-
+                //si tous les champs sont remplis valider la requette
+                if(validateEns() && validateFiliere() && validateClasse() && validateMatiere() && validateVh()){
+                    updateProgramme();
+                    status_request=null;
+                    getAll();
+                }
             }else {
-                createProgramme(programmer);
-                status_request=null;
-                getAll();
+                //si tous les champs sont remplis valider la requette
+                if(validateEns() && validateFiliere() && validateClasse() && validateMatiere() && validateVh()){
+                    createProgramme(programmer);
+                    status_request=null;
+                    getAll();
+                }
 
             }
 
         }
+
+    }
+
+    public boolean validateEns(){
+        String ens = nomEnseignant_edt.getText().toString();
+
+        if (ens.isEmpty()){
+            Toast.makeText(this,"Veillez entrer le nom de l'enseignant",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+
+    }
+    public boolean validateFiliere(){
+        String filiere = filiere_edt.getText().toString();
+
+        if (filiere.isEmpty()){
+            Toast.makeText(this,"Veillez entrer la filiere",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+
+    }
+    public boolean validateMatiere(){
+        String matiere = matiere_edt.getText().toString();
+
+        if (matiere.isEmpty()){
+            Toast.makeText(this,"Veillez entrer la matiere",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+
+    }
+    public boolean validateClasse(){
+        String classe = classe_edt.getText().toString();
+
+        if (classe.isEmpty()){
+            Toast.makeText(this,"Veillez entrer la classe",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+
+    }
+    public boolean validateVh(){
+        String vh = creneau_edt.getText().toString();
+
+        if (vh.isEmpty()){
+            Toast.makeText(this,"Veillez entrer le creneau",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
 
     }
 }

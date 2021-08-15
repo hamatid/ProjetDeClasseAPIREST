@@ -60,9 +60,10 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
             view.setTag(holder);
         }
         if(pos %2 == 0){
-            view.setBackgroundColor(Color.parseColor("#165952"));
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
         }else{
-            view.setBackgroundColor(Color.parseColor("#009289"));
+
+            view.setBackgroundColor(Color.parseColor("#cfd8dc"));
         }
         holder.nom_ens.setText(String.format("Nom Enseignant: %s", cours.get(pos).getEns()));
         holder.filiere.setText(String.format("Filiere: %s", cours.get(pos).getFiliere()));
@@ -117,10 +118,8 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         TextView matiere;
         @BindView(R.id.creneau)
         TextView creneau;
-
         @BindView(R.id.del)
         Button del;
-
         @BindView(R.id.edit)
         Button edit;
         ViewHolder (View view){
