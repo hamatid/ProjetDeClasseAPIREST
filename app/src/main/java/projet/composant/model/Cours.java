@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 public class Cours {
 
     @SerializedName("id")
-    private String id;
+    private int id;
 
-    @SerializedName("nom_enseignant")
-    private String nom_enseignant;
+    @SerializedName("ens")
+    private String ens;
 
     @SerializedName("filiere")
     private String filiere;
@@ -26,9 +26,9 @@ public class Cours {
     public Cours() {
     }
 
-    public Cours(String id, String nom_enseignant, String filiere, String matiere, String classe, String vh) {
+    public Cours(int id, String ens, String filiere, String matiere, String classe, String vh) {
         this.id = id;
-        this.nom_enseignant = nom_enseignant;
+        this.ens = ens;
         this.filiere = filiere;
         this.matiere = matiere;
         this.classe = classe;
@@ -40,28 +40,28 @@ public class Cours {
     public String toString() {
         return "cours{" +
                 "id=" + id +
-                ", nom_enseignant='" + nom_enseignant + '\'' +
-                ", matiere='" + matiere + '\'' +
-                ", classe='" + classe + '\'' +
-                ", filiere='" + filiere + '\'' +
+                ", ens= " + ens + '\'' +
+                ", matiere= " + matiere + '\'' +
+                ", classe= " + classe + '\'' +
+                ", filiere= " + filiere + '\'' +
                 ", vh='" + vh + '\'' +
                 '}';
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getNom_enseignant() {
-        return nom_enseignant;
+    public String getEns() {
+        return ens;
     }
 
-    public void setNom_enseignant(String nom_enseignant) {
-        this.nom_enseignant = nom_enseignant;
+    public void setEns(String ens) {
+        this.ens = ens;
     }
 
     public String getFiliere() {

@@ -5,12 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,7 +25,6 @@ import projet.composant.adapter.CoursAdapter;
 import projet.composant.model.Cours;
 import projet.composant.network.ApiUtils;
 import projet.composant.service.ProgrammerService;
-import projet.composant.utils.Global;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
 
             status_request = intent.getStringExtra("status");
+            int id = Integer.parseInt(intent.getStringExtra("id"));
+
 
             if (status_request.equals("edit")){
                 nomEnseignant_edt.setText(intent.getStringExtra("nom_ens"));
@@ -75,15 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 creneau_edt.setText(intent.getStringExtra("creneau"));
                 matiere_edt.setText(intent.getStringExtra("matiere"));
                 init();
-                programmer.setId(intent.getStringExtra("cour_id"));
+                MainActivity.this.programmer.setId(id);
+
             }else {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 dialogBuilder.setTitle("Attention");
                 dialogBuilder.setMessage("Voulez vous reelement effectuer la supression ?");
                 dialogBuilder.setPositiveButton("Oui", (dialog, which) -> {
-                    init();
-                    programmer.setId(intent.getStringExtra("cour_id"));
-                    deleteProgramme();
+                    deleteProgramme(id);
                     dialog.dismiss();
                 });
 
@@ -102,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Cours> call, Response<Cours> response) {
                 if(response.isSuccessful()){
                     makeText(MainActivity.this, "Programme created successfully!", Toast.LENGTH_SHORT).show();
+                    refresh();
                 }
             }
 
@@ -132,9 +130,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void updateProgramme(Cours p){
+    private void updateProgramme(){
+
         programmerService = ApiUtils.getProgrammerService();
-        Call<Cours> call = programmerService.apiUpdate(p);
+        this.programmer.setEns(nomEnseignant_edt.getText().toString());
+        this.programmer.setClasse(classe_edt.getText().toString());
+        this.programmer.setFiliere(filiere_edt.getText().toString());
+        this.programmer.setMatiere(matiere_edt.getText().toString());
+        this.programmer.setVh(creneau_edt.getText().toString());
+        Call<Cours> call = programmerService.apiUpdate(programmer.getId(),programmer);
         call.enqueue(new Callback<Cours>() {
             @Override
             public void onResponse(Call<Cours> call, Response<Cours> response) {
@@ -151,11 +155,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //getAll();
+        //makeText(MainActivity.this, "User updated successfully!", Toast.LENGTH_SHORT).show();
+        refresh();
+
     }
 
-    private void deleteProgramme(){
+    private void deleteProgramme(int id){
         programmerService = ApiUtils.getProgrammerService();
-        Call<Cours> call = programmerService.apiDelete(programmer.getId());
+        Call<Cours> call = programmerService.apiDelete(id);
         call.enqueue(new Callback<Cours>() {
             @Override
             public void onResponse(Call<Cours> call, Response<Cours> response) {
@@ -180,27 +188,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        programmer=new Cours();
-        programmer.setNom_enseignant(nomEnseignant_edt.getText().toString());
-        programmer.setClasse(classe_edt.getText().toString());
-        programmer.setFiliere(filiere_edt.getText().toString());
-        programmer.setMatiere(matiere_edt.getText().toString());
-        programmer.setVh(creneau_edt.getText().toString());
+        this.programmer=new Cours();
     }
 
-    @OnClick({R.id.save,R.id.search})
+    private  void refresh(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.save})
     public void managedAction(View view){
         if(view.getId()==R.id.save){
 
 
             if (status_request=="edit"){
-                updateProgramme(programmer);
+                updateProgramme();
                 status_request=null;
+                getAll();
 
             }else {
-                init();
                 createProgramme(programmer);
+                status_request=null;
                 getAll();
+
             }
 
         }

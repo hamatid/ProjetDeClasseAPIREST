@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,7 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         }else{
             view.setBackgroundColor(Color.parseColor("#009289"));
         }
-        holder.nom_ens.setText(String.format("Nom Enseignant: %s", cours.get(pos).getNom_enseignant()));
+        holder.nom_ens.setText(String.format("Nom Enseignant: %s", cours.get(pos).getEns()));
         holder.filiere.setText(String.format("Filiere: %s", cours.get(pos).getFiliere()));
         holder.matiere.setText(String.format("Matiere: %s", cours.get(pos).getMatiere()));
         holder.classe.setText(String.format("Classe: %s", cours.get(pos).getClasse()));
@@ -73,8 +74,8 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("cour_item");
-                intent.putExtra("cour_id", cours.get(pos).getId());
-                intent.putExtra("nom_ens", cours.get(pos).getNom_enseignant());
+                intent.putExtra("id", ""+cours.get(pos).getId());
+                intent.putExtra("nom_ens", cours.get(pos).getEns());
                 intent.putExtra("filiere", cours.get(pos).getFiliere());
                 intent.putExtra("classe", cours.get(pos).getClasse());
                 intent.putExtra("matiere", cours.get(pos).getMatiere());
@@ -88,7 +89,7 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("cour_item");
-                intent.putExtra("cour_id", cours.get(pos).getId());
+                intent.putExtra("id", ""+cours.get(pos).getId());
                 intent.putExtra("status", "del");
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
@@ -118,10 +119,10 @@ public class CoursAdapter extends ArrayAdapter<Cours> {
         TextView creneau;
 
         @BindView(R.id.del)
-        MaterialButton del;
+        Button del;
 
         @BindView(R.id.edit)
-        MaterialButton edit;
+        Button edit;
         ViewHolder (View view){
             ButterKnife.bind(this,view);
         }

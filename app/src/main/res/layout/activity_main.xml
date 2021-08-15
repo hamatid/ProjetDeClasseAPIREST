@@ -74,18 +74,13 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp">
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/save"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
-                android:paddingLeft="@dimen/_30sdp"
-                android:background="@color/white"
-                android:elevation="@dimen/_10sdp"
-                android:drawableLeft="@drawable/save"
-                android:textColor="@color/black"
-                app:strokeColor="@color/green"
-                app:strokeWidth="@dimen/_2sdp"
-                app:cornerRadius="@dimen/_15sdp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="save"
+                />
+
         </LinearLayout>
 
         <LinearLayout
@@ -93,18 +88,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_gravity="center">
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/search"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
-                android:paddingLeft="@dimen/_30sdp"
-                android:background="@color/white"
-                android:elevation="@dimen/_10sdp"
-                android:drawableLeft="@drawable/search"
-                android:textColor="@color/black"
-                app:strokeColor="@color/green"
-                app:strokeWidth="@dimen/_2sdp"
-                app:cornerRadius="@dimen/_15sdp"/>
         </LinearLayout>
 
 
